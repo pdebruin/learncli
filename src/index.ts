@@ -2,6 +2,7 @@
 
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
+import type { Tool } from "@modelcontextprotocol/sdk/types.js";
 
 const MCP_ENDPOINT = "https://learn.microsoft.com/api/mcp";
 const TOOL_NAME = "microsoft_docs_search";
@@ -24,7 +25,7 @@ async function validateEndpoint(): Promise<boolean> {
 async function validateTool(client: Client): Promise<boolean> {
   try {
     const tools = await client.listTools();
-    return tools.tools.some((tool) => tool.name === TOOL_NAME);
+    return tools.tools.some((tool: Tool) => tool.name === TOOL_NAME);
   } catch (error) {
     return false;
   }
