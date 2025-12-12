@@ -1,7 +1,10 @@
 {
-  "name": "learncli",
+  "name": "@pdebruin/learncli",
   "version": "1.0.0",
   "description": "A cross-platform command-line learning app",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "cli",
     "learning",
