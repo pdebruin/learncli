@@ -61,4 +61,13 @@ describe('learncli', () => {
     expect(result.stderr).toContain('MCP endpoint');
     expect(result.exitCode).toBe(1);
   });
+
+  test('user enters "docs -q" with query shows execution progress logs', () => {
+    const result = runCLIWithError(['docs', '-q', 'test query']);
+    // Should show progress logs in stdout or stderr
+    const output = result.stdout + '\n' + result.stderr;
+    expect(output).toContain('[INFO] Starting search with query:');
+    expect(output).toContain('[INFO] Validating MCP endpoint:');
+    expect(output).toContain('https://learn.microsoft.com/api/mcp');
+  });
 });

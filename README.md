@@ -48,6 +48,21 @@ Or use the npm start script:
 npm start -- docs -q "your search query"
 ```
 
+**Note:** When using `npm start`, you must include `--` before the arguments to pass them correctly to the script.
+
+#### Logging
+
+The CLI provides execution progress logs when searching documentation:
+- `[INFO]` logs show the execution flow (endpoint validation, MCP connection, tool calling, etc.)
+- `[ERROR]` logs show any errors encountered
+- `[RESPONSE]` logs show the raw response from the MCP server
+
+To enable detailed debug logging, set the `DEBUG` environment variable:
+
+```bash
+DEBUG=true node dist/index.js docs -q "your search query"
+```
+
 ### Development
 
 - **Build**: `npm run build` - Compiles TypeScript to JavaScript
