@@ -14,7 +14,8 @@ async function validateEndpoint(): Promise<boolean> {
         "Content-Type": "application/json",
       },
     });
-    return response.ok || response.status === 400; // 400 might indicate valid endpoint but bad request
+    // Accept 2xx responses and 400 (which indicates the endpoint exists but request format may be incorrect)
+    return response.ok || response.status === 400;
   } catch (error) {
     return false;
   }
@@ -64,7 +65,7 @@ async function searchDocs(query: string): Promise<void> {
     const result = await client.callTool({
       name: TOOL_NAME,
       arguments: {
-        query: query,
+        query,
       },
     });
 
@@ -74,7 +75,11 @@ async function searchDocs(query: string): Promise<void> {
     await client.close();
   } catch (error) {
     console.error("Error searching docs:", error instanceof Error ? error.message : String(error));
-    await client.close();
+    try {
+      await client.close();
+    } catch (closeError) {
+      // Ignore errors during cleanup
+    }
     process.exit(1);
   }
 }
