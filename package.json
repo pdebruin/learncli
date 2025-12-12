@@ -2,6 +2,22 @@
   "name": "learncli",
   "version": "1.0.0",
   "description": "A cross-platform command-line learning app",
+  "keywords": [
+    "cli",
+    "learning",
+    "command-line"
+  ],
+  "homepage": "https://github.com/pdebruin/learncli#readme",
+  "bugs": {
+    "url": "https://github.com/pdebruin/learncli/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pdebruin/learncli.git"
+  },
+  "license": "ISC",
+  "author": "Pieter de Bruin",
+  "type": "commonjs",
   "main": "src/index.js",
   "bin": {
     "learncli": "src/index.js"
@@ -9,20 +25,5 @@
   "scripts": {
     "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "cli",
-    "learning",
-    "command-line"
-  ],
-  "author": "Pieter de Bruin",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/pdebruin/learncli.git"
-  },
-  "bugs": {
-    "url": "https://github.com/pdebruin/learncli/issues"
-  },
-  "homepage": "https://github.com/pdebruin/learncli#readme"
+  }
 }
