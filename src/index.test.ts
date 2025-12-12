@@ -1,15 +1,15 @@
-const { execFileSync } = require('child_process');
-const path = require('path');
+import { execFileSync } from 'child_process';
+import path from 'path';
 
-// Path to the CLI script
-const CLI_PATH = path.join(__dirname, 'index.js');
+// Path to the CLI script (now compiled JS in dist)
+const CLI_PATH = path.join(__dirname, '../dist/index.js');
 
 // Helper function to execute the CLI synchronously
-function runCLI(args = []) {
+function runCLI(args: string[] = []): string {
   try {
     const output = execFileSync('node', [CLI_PATH, ...args], { encoding: 'utf8' });
     return output.trim();
-  } catch (error) {
+  } catch (error: any) {
     return (error.stdout || '').trim();
   }
 }

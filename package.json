@@ -21,22 +21,33 @@
   "license": "ISC",
   "author": "Pieter de Bruin",
   "type": "commonjs",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "bin": {
-    "learncli": "src/index.js"
+    "learncli": "dist/index.js"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "test": "jest"
+    "build": "tsc",
+    "start": "npm run build && node dist/index.js",
+    "test": "npm run build && jest",
+    "prepublishOnly": "npm run build"
   },
   "jest": {
+    "preset": "ts-jest",
     "testEnvironment": "node",
     "coverageDirectory": "coverage",
     "collectCoverageFrom": [
-      "src/**/*.js"
+      "src/**/*.ts",
+      "!src/**/*.test.ts"
     ]
   },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
-    "jest": "^30.2.0"
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.0.1",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
+    "typescript": "^5.9.3"
   }
 }
