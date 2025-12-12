@@ -4,7 +4,7 @@
   "description": "A cross-platform command-line learning app",
   "main": "src/index.js",
   "bin": {
-    "learncli": "./src/index.js"
+    "learncli": "src/index.js"
   },
   "scripts": {
     "start": "node src/index.js",
