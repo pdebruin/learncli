@@ -10,7 +10,19 @@
     "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "cli",
+    "learning",
+    "command-line"
+  ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pdebruin/learncli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pdebruin/learncli/issues"
+  },
+  "homepage": "https://github.com/pdebruin/learncli#readme"
 }
