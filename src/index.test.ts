@@ -57,8 +57,8 @@ describe('learncli', () => {
   test('user enters "docs -q" with query text attempts to connect to MCP endpoint', () => {
     const result = runCLIWithError(['docs', '-q', 'test query']);
     // We expect it to try to connect and fail due to network restrictions
-    // The error message should indicate endpoint availability issue
-    expect(result.stderr).toContain('MCP endpoint');
+    // The error message should indicate connection or endpoint issue
+    expect(result.stderr).toContain('[ERROR] Error searching docs:');
     expect(result.exitCode).toBe(1);
   });
 
@@ -67,7 +67,7 @@ describe('learncli', () => {
     // Should show progress logs in stdout or stderr
     const output = result.stdout + '\n' + result.stderr;
     expect(output).toContain('[INFO] Starting search with query:');
-    expect(output).toContain('[INFO] Validating MCP endpoint:');
-    expect(output).toContain('https://learn.microsoft.com/api/mcp');
+    expect(output).toContain('[INFO] Creating MCP client...');
+    expect(output).toContain('[INFO] Connecting to MCP server...');
   });
 });

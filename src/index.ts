@@ -8,21 +8,6 @@ const MCP_ENDPOINT = "https://learn.microsoft.com/api/mcp";
 const TOOL_NAME = "microsoft_docs_search";
 const DEBUG = process.env.DEBUG === "true";
 
-async function validateEndpoint(): Promise<boolean> {
-  try {
-    const response = await fetch(MCP_ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    // Accept 2xx responses and 400 (which indicates the endpoint exists but request format may be incorrect)
-    return response.ok || response.status === 400;
-  } catch (error) {
-    return false;
-  }
-}
-
 async function validateTool(client: Client): Promise<boolean> {
   try {
     const tools = await client.listTools();
@@ -34,15 +19,6 @@ async function validateTool(client: Client): Promise<boolean> {
 
 async function searchDocs(query: string): Promise<void> {
   console.log(`[INFO] Starting search with query: "${query}"`);
-  
-  // Validate endpoint
-  console.log(`[INFO] Validating MCP endpoint: ${MCP_ENDPOINT}`);
-  const endpointAvailable = await validateEndpoint();
-  if (!endpointAvailable) {
-    console.error(`[ERROR] MCP endpoint ${MCP_ENDPOINT} is not available`);
-    process.exit(1);
-  }
-  console.log(`[INFO] MCP endpoint is available`);
 
   // Create MCP client
   console.log(`[INFO] Creating MCP client...`);
