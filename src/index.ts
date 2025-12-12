@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const args = process.argv.slice(2);
-const firstParam = args[0];
+const args: string[] = process.argv.slice(2);
+const firstParam: string | undefined = args[0];
 
 if (firstParam === "docs") {
   console.log("hello docs");
