@@ -1,4 +1,4 @@
-const { execSync, exec } = require('child_process');
+const { execFileSync, execFile } = require('child_process');
 const path = require('path');
 
 // Path to the CLI script
@@ -7,8 +7,7 @@ const CLI_PATH = path.join(__dirname, 'index.js');
 // Helper function to execute the CLI synchronously
 function runCLI(args = []) {
   try {
-    const command = `node ${CLI_PATH} ${args.join(' ')}`;
-    const output = execSync(command, { encoding: 'utf8' });
+    const output = execFileSync('node', [CLI_PATH, ...args], { encoding: 'utf8' });
     return { stdout: output, exitCode: 0 };
   } catch (error) {
     return { 
@@ -22,8 +21,7 @@ function runCLI(args = []) {
 // Helper function to execute the CLI asynchronously (for timeout tests)
 function runCLIAsync(args = [], timeout = 5000) {
   return new Promise((resolve, reject) => {
-    const command = `node ${CLI_PATH} ${args.join(' ')}`;
-    exec(command, { timeout }, (error, stdout, stderr) => {
+    execFile('node', [CLI_PATH, ...args], { timeout }, (error, stdout, stderr) => {
       if (error && !error.killed) {
         resolve({ 
           stdout: stdout || '', 
