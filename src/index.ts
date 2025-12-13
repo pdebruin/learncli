@@ -141,7 +141,7 @@ async function main() {
       if (DEBUG) console.log(`[DEBUG] Found query at index ${qIndex + 1}: "${query}"`);
       await searchDocs(query);
     } else {
-      console.log("hello docs");
+      console.log('Please provide a search query using: docs -q "your search query"');
       if (DEBUG) console.log(`[DEBUG] No query found. Expected: docs -q "your query"`);
     }
   } else if (firstParam === "code") {
