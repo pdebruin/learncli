@@ -117,9 +117,18 @@ node dist/index.js docs -q "test query"
    node --version  # Should be 18.x or higher
    ```
 
-2. Clear node_modules and reinstall:
+2. Clear node_modules and dist directories, then reinstall:
    ```bash
+   # On Linux/macOS
    rm -rf node_modules dist
+   
+   # On Windows (PowerShell)
+   Remove-Item -Recurse -Force node_modules, dist
+   
+   # On Windows (CMD)
+   rmdir /s /q node_modules dist
+   
+   # Then reinstall
    npm install
    npm run build
    ```
