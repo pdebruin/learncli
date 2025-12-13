@@ -74,6 +74,7 @@ async function searchDocs(query: string): Promise<void> {
               break;
             } catch (e) {
               // Not valid JSON, continue searching
+              if (DEBUG) console.log(`[DEBUG] Failed to parse JSON: ${e instanceof Error ? e.message : String(e)}`);
             }
           }
         }
