@@ -88,10 +88,15 @@ async function searchDocs(query: string): Promise<void> {
         
         if (results.length > 0) {
           const firstResult = results[0];
+          if (DEBUG) console.log(`[DEBUG] First result keys:`, Object.keys(firstResult));
+          if (DEBUG) console.log(`[DEBUG] First result:`, JSON.stringify(firstResult, null, 2));
+          
           console.log(`\n[FIRST RESULT]`);
           if (firstResult.title) console.log(`Title: ${firstResult.title}`);
-          if (firstResult.body) console.log(`Body: ${firstResult.body}`);
-          if (firstResult.link) console.log(`Link: ${firstResult.link}`);
+          if (firstResult.content) console.log(`Content: ${firstResult.content}`);
+          // Check for both 'links' and 'link' field names
+          const linkField = firstResult.links || firstResult.link;
+          if (linkField) console.log(`Link: ${linkField}`);
         }
       } else {
         console.log(`[RESPONSE] No structured content found`);
