@@ -1,13 +1,13 @@
 {
   "name": "@pjmdebruin/learncli",
-  "version": "1.0.0",
-  "description": "A cross-platform command-line learning app",
+  "version": "1.0.1",
+  "description": "A cross-platform command-line app to interact with Microsoft Learn through Learn MCP Server",
   "publishConfig": {
     "access": "public"
   },
   "keywords": [
     "cli",
-    "learning",
+    "learn",
     "command-line"
   ],
   "homepage": "https://github.com/pdebruin/learncli#readme",
