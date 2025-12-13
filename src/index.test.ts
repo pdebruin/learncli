@@ -41,7 +41,7 @@ describe('learncli', () => {
 
   test('user enters "docs"', () => {
     const output = runCLI(['docs']);
-    expect(output).toBe('hello docs');
+    expect(output).toBe('Please provide a search query using: docs -q "your search query"');
   });
 
   test('user enters "anotherparam"', () => {
@@ -51,7 +51,7 @@ describe('learncli', () => {
 
   test('user enters "docs -q" without query text', () => {
     const output = runCLI(['docs', '-q']);
-    expect(output).toBe('hello docs');
+    expect(output).toBe('Please provide a search query using: docs -q "your search query"');
   });
 
   test('user enters "docs -q" with query text attempts to connect to MCP endpoint', () => {
