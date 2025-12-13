@@ -85,7 +85,7 @@ async function searchDocs(query: string): Promise<void> {
         let results = Array.isArray(structuredData) ? structuredData : [structuredData];
         
         // Check if the first item has a 'results' property that is an array
-        if (results.length > 0 && results[0].results && Array.isArray(results[0].results)) {
+        if (results.length > 0 && results[0] && results[0].results && Array.isArray(results[0].results)) {
           results = results[0].results;
         }
         
