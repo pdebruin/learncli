@@ -58,12 +58,51 @@ async function searchDocs(query: string): Promise<void> {
     });
 
     console.log(`[INFO] Received response from MCP server`);
-    // Output raw response
-    console.log(`[RESPONSE] Raw response from MCP server:`);
-    console.log(JSON.stringify(result, null, 2));
+    
+    // Parse and format the response
+    if (result.content && Array.isArray(result.content)) {
+      // Look for structured content (JSON arrays or objects)
+      let structuredData = null;
+      
+      for (const item of result.content) {
+        if (item.type === 'text' && item.text && typeof item.text === 'string') {
+          const trimmed = item.text.trim();
+          if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
+            try {
+              const parsed = JSON.parse(trimmed);
+              structuredData = parsed;
+              break;
+            } catch (e) {
+              // Not valid JSON, continue searching
+            }
+          }
+        }
+      }
+      
+      if (structuredData) {
+        // Handle both array and object structures
+        let results = Array.isArray(structuredData) ? structuredData : [structuredData];
+        
+        console.log(`[RESULTS] Found ${results.length} result(s)`);
+        
+        if (results.length > 0) {
+          const firstResult = results[0];
+          console.log(`\n[FIRST RESULT]`);
+          if (firstResult.title) console.log(`Title: ${firstResult.title}`);
+          if (firstResult.body) console.log(`Body: ${firstResult.body}`);
+          if (firstResult.link) console.log(`Link: ${firstResult.link}`);
+        }
+      } else {
+        console.log(`[RESPONSE] No structured content found`);
+        if (DEBUG) console.log(JSON.stringify(result, null, 2));
+      }
+    } else {
+      console.log(`[RESPONSE] Unexpected response format`);
+      if (DEBUG) console.log(JSON.stringify(result, null, 2));
+    }
 
     await client.close();
-    console.log(`[INFO] Connection closed`);
+    console.log(`\n[INFO] Connection closed`);
   } catch (error) {
     console.error("[ERROR] Error searching docs:", error instanceof Error ? error.message : String(error));
     try {
