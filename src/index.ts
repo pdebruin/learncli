@@ -96,7 +96,10 @@ async function searchDocs(query: string): Promise<void> {
           if (firstResult.content) console.log(`Content: ${firstResult.content}`);
           // Check for both 'links' and 'link' field names
           const linkField = firstResult.links || firstResult.link;
-          if (linkField) console.log(`Link: ${linkField}`);
+          if (linkField) {
+            const linkDisplay = typeof linkField === 'string' ? linkField : JSON.stringify(linkField);
+            console.log(`Link: ${linkDisplay}`);
+          }
         }
       } else {
         console.log(`[RESPONSE] No structured content found`);
